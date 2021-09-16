@@ -1,11 +1,12 @@
 %{
 #include <stdio.h>
+extern int yylineno;
 %}
 
-%token TOK_SEMICOLON TOK_ADD TOK_SUB TOK_MUL TOK_DIV TOK_NUM TOK_PRINTLN
+%token TOK_SEMICOLON TOK_ADD TOK_SUB TOK_MUL TOK_DIV TOK_NUM TOK_PRINTLN TOK_PRINT
 
 %union{
-        int int_val;
+        float int_val;
 }
 
 /*%type <int_val> expr TOK_NUM*/
@@ -21,29 +22,22 @@ stmt:
 ;
 
 expr_stmt:
-	   expr TOK_SEMICOLON
-	   | TOK_PRINTLN expr TOK_SEMICOLON 
+	 expr TOK_SEMICOLON
+	| TOK_PRINTLN expr TOK_SEMICOLON 
+	| TOK_PRINT expr TOK_SEMICOLON
 		{
-			fprintf(stdout, "the value is %d\n", $2);
+			fprintf(stdout, "Result: %.2f\n", $2);
 		} 
 ;
 
 expr: 	 
-	expr TOK_ADD expr
+	expr expr TOK_ADD
 	  {
-		$$ = $1 + $3;
+		$$ = $1 + $2;
 	  }
-	| expr TOK_SUB expr
+	| expr expr TOK_SUB
 	  {
-		$$ = $1 - $3;
-	  }
-	| expr TOK_MUL expr
-	  {
-		$$ = $1 * $3;
-	  }
-	| expr TOK_DIV expr
-	  {
-		$$ = $1 / $3; 
+		$$ = $1 - $2;
 	  }
 	| TOK_NUM
 	  { 	
@@ -56,7 +50,7 @@ expr:
 
 int yyerror(char *s)
 {
-	printf("syntax error\n");
+	printf("Parsing error: line %d\n",yylineno);
 	return 0;
 }
 

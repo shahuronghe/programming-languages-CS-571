@@ -1,9 +1,11 @@
 %{
 #include <stdio.h>
 extern int yylineno;
+int yylex();
+int yyerror(char *s);
 %}
 
-%token TOK_SEMICOLON TOK_ADD TOK_SUB TOK_MUL TOK_DIV TOK_NUM TOK_PRINTLN TOK_PRINT
+%token TOK_SEMICOLON TOK_ADD TOK_SUB TOK_NUM TOK_PRINTLN TOK_PRINT
 
 %union{
         float int_val;

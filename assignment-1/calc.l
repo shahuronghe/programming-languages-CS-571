@@ -30,7 +30,6 @@ digit	([0-9])
 "-"	{	return(TOK_SUB);	}
 [ \n] 	{}
 [ \t]	{}
-[ ]	{}
 
 .	{printf("Lexical analysis error: '%c' at line no: %d\n", 
 			yytext[0],yylineno);

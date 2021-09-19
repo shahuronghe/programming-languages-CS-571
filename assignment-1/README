@@ -1,0 +1,16 @@
+Programming Languages CS-571
+Assignment No 1:
+	Flex and Bison Calculator
+
+Group Members:
+	Shahu S Ronghe [sronghe1@binghamton.edu]
+	Shantanu S Walunj [swalunj1@binghamton.edu]
+
+This assignment has been tested on remote.cs.binghamton.edu
+
+Execution Steps:
+	1. run "make" command on terminal
+	2. the above make command will generate executable files
+	3. "./calc < input" to test the testcases against the program.
+
+Note: The program terminates on parsing/lexical error.

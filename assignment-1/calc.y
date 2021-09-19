@@ -1,24 +1,40 @@
+/**
+* Declaration of variables and functions
+*/
 %{
-#include <stdio.h>
-extern int yylineno;
-int yylex();
-int yyerror(char *s);
+	#include <stdio.h>
+	extern int yylineno;
+	int yylex();
+	int yyerror(char *s);
 %}
 
+/**
+* Token declaration
+*/
 %token TOK_SEMICOLON TOK_ADD TOK_SUB TOK_NUM TOK_PRINTLN TOK_PRINT
 
+/**
+* For storing values omitted by yylval
+*/
 %union{
-        float int_val;
+        float val;
 }
 
-/*%type <int_val> expr TOK_NUM*/
-%type <int_val> expr TOK_NUM
+/**
+* Values associated with grammar declared in %union
+*/
+%type <val> expr TOK_NUM
 
+/**
+* Precedence as left
+*/
 %left TOK_ADD TOK_SUB
-%left TOK_MUL TOK_DIV
 
 %%
 
+/**
+* Context Free Grammar below with postfix expressions.
+*/
 stmt: 
 	| stmt expr_stmt
 ;
@@ -50,12 +66,18 @@ expr:
 
 %%
 
+/**
+* Method to print the parsing error with line no occured when there is mistake in input parameters.
+*/
 int yyerror(char *s)
 {
-	printf("Parsing error: line %d\n",yylineno);
+	printf("Parsing error: line %d\n", yylineno);
 	return 0;
 }
 
+/**
+* Main function to start parsing.
+*/
 int main()
 {
    yyparse();

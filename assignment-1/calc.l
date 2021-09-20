@@ -6,7 +6,6 @@
 	#include <stdio.h>
 	#include "calc.tab.h"
 	int yylineno;
-	char *str;
 %}
 
 digit	([0-9])
@@ -23,7 +22,7 @@ digit	([0-9])
 
 {digit}+		{ sscanf(yytext, "%f", &yylval); return TOK_NUM; }
 
-{digit}"."{digit}+	{ sscanf(yytext, "%f", &yylval); return TOK_NUM; }
+{digit}+"."{digit}+	{ sscanf(yytext, "%f", &yylval); return TOK_NUM; }
 
 ";"			{ return(TOK_SEMICOLON); }
 

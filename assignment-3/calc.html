@@ -1,52 +1,57 @@
-
 <style>
-h1{
-  text-align: center;
-  margin-top: 1px;
-  margin-bottom: 1px;
+h1 {
+	text-align: center;
+	margin-top: 1px;
+	margin-bottom: 1px;
 }
-*{
-  margin: 0;
-  padding: 0;
+
+* {
+	margin: 0;
+	padding: 0;
 }
-.container{
-  margin: auto;
-  width: 25%;
-  padding: 10px;
-  border: 1px solid #f2f2f2;
-  background-color: #fff;
-  height: 400px;
-  background-color: #F8F8F8;
+
+.container {
+	margin: auto;
+	width: 25%;
+	padding: 10px;
+	border: 1px solid #f2f2f2;
+	background-color: #fff;
+	height: 400px;
+	background-color: #F8F8F8;
 }
-.header{
-  padding: 10px;
-  color: #000;
-   font-weight: bold;
-  font-size: 24px;
-  text-align: center;
+
+.header {
+	padding: 10px;
+	color: #000;
+	font-weight: bold;
+	font-size: 24px;
+	text-align: center;
 }
-.result{
-  font-size: 24px;
-  padding: 24px 5px;
-  font-weight: 700;
-  text-align: right;
-  width: 96%;
-  border: none;
-  background-color: #F8F8F8;
+
+.result {
+	font-size: 24px;
+	padding: 24px 5px;
+	font-weight: 700;
+	text-align: right;
+	width: 96%;
+	border: none;
+	background-color: #F8F8F8;
 }
-.row{
-  display: inline-block;
-  width: 100%;
+
+.row {
+	display: inline-block;
+	width: 100%;
 }
-.global{
- padding: 15px;
- font-weight: bold;
- font-size: 16px;
- border-radius: 3px;
- float: left;
- width: 23.5%;
- margin: 2px;
- border: 1px solid #000;
+
+.global {
+	padding: 15px;
+	font-weight: bold;
+	font-size: 16px;
+	border-radius: 3px;
+	float: left;
+	width: 23.5%;
+	margin: 2px;
+	border: 1px solid #000;
 }
 </style>
 <script>
@@ -54,90 +59,83 @@ h1{
 	var running = false;
 	var stack = [];
 }
-
-window.onload = function(){
-document.getElementById("on").onclick = function() {
-										running = true;
-										document.getElementById("result").value = "0";
-										stack = [];
-										};
-document.getElementById("off").onclick = function() {
-										running = false;
-										document.getElementById("result").value = "";
-										stack = [];
-										};
-document.getElementById("clear").onclick = function() {
-										if(running){
-											document.getElementById("result").value = "0";
-											stack = [];
-										}
-										};
-document.getElementById("sum").onclick = function() {
-										if(running && stack.length == 1){
-											document.getElementById("result").value = stack[0];
-										}
-										};									
+window.onload = function() {
+	document.getElementById("on").onclick = function() {
+		running = true;
+		document.getElementById("result").value = "0";
+		stack = [];
+	};
+	document.getElementById("off").onclick = function() {
+		running = false;
+		document.getElementById("result").value = "";
+		stack = [];
+	};
+	document.getElementById("clear").onclick = function() {
+		if(running) {
+			document.getElementById("result").value = "0";
+			stack = [];
+		}
+	};
+	document.getElementById("sum").onclick = function() {
+		if(running && stack.length == 1) {
+			document.getElementById("result").value = stack[0];
+		}
+	};
 }
 
-function collectValues(val){
-	if(document.getElementById("result").value == "0"){
+function collectValues(val) {
+	if(document.getElementById("result").value == "0") {
 		document.getElementById("result").value = "";
 	}
-	if(running){
-		 if (!isNaN(val)) {
-            stack.push(Number(val));
-        } else {
-            let num1 = stack.pop();
+	if(running) {
+		if(!isNaN(val)) {
+			stack.push(Number(val));
+		} else {
+			let num1 = stack.pop();
 			let num2 = stack.pop();
-            switch (val) {
-                case '+':
-                    stack.push(num2 + num1);
-                    break;
-                case '-':
-                    stack.push(num2 - num1);
-                    break;
-                case '*':
-                    stack.push(num2 * num1);
-                    break;
-                case '/':
-                    stack.push(num2 / num1);
-                    break;
-            }
-        }
+			switch(val) {
+				case '+':
+					stack.push(num2 + num1);
+					break;
+				case '-':
+					stack.push(num2 - num1);
+					break;
+				case '*':
+					stack.push(num2 * num1);
+					break;
+				case '/':
+					stack.push(num2 / num1);
+					break;
+			}
+		}
 		document.getElementById("result").value += val;
 	}
 }
-
 </script>
-    <div class="container">
-      <div class="header">My Calculator</div>
-      <input type="text" class="result" id="result" value="">
-      <div class="row">
-        <input type="button" id="on" value="ON" class="global">
-        <input type="button" id="off" value="OFF" class="global">
-      </div>
-      <div class="row">
-        <input type="button" value="7" class="global" onclick="collectValues(this.value)">
-        <input type="button" value="8" class="global" onclick="collectValues(this.value)">
-        <input type="button" value="9" class="global" onclick="collectValues(this.value)">
-        <input type="button" id="divide" value="/" class="global" onclick="collectValues(this.value)">
-      </div>
-      <div class="row">
-        <input type="button" value="4" class="global" onclick="collectValues(this.value)">
-        <input type="button" value="5" class="global" onclick="collectValues(this.value)">
-        <input type="button" value="6" class="global" onclick="collectValues(this.value)">
-        <input type="button" id="multiply" value="*" class="global" onclick="collectValues(this.value)">
-      </div>
-      <div class="row">
-        <input type="button" value="1" class="global" onclick="collectValues(this.value)">
-        <input type="button" value="2" class="global" onclick="collectValues(this.value)">
-        <input type="button" value="3" class="global" onclick="collectValues(this.value)">
-        <input type="button" id="minus" value="-" class="global" onclick="collectValues(this.value)">
-      </div>
-      <div class="row">
-        <input type="button" value="0" class="global" onclick="collectValues(this.value)">
-        <input type="button" id="clear" value="Clear" class="global">
-        <input type="button" id="sum" value="=" class="global">
-        <input type="button" value="+" class="global" onclick="collectValues(this.value)">
-      </div>
-    </div>
+<div class="container">
+	<div class="header">My Calculator</div>
+	<input type="text" class="result" id="result" value="">
+	<div class="row">
+		<input type="button" id="on" value="ON" class="global">
+		<input type="button" id="off" value="OFF" class="global"> </div>
+	<div class="row">
+		<input type="button" value="7" class="global" onclick="collectValues(this.value)">
+		<input type="button" value="8" class="global" onclick="collectValues(this.value)">
+		<input type="button" value="9" class="global" onclick="collectValues(this.value)">
+		<input type="button" id="divide" value="/" class="global" onclick="collectValues(this.value)"> </div>
+	<div class="row">
+		<input type="button" value="4" class="global" onclick="collectValues(this.value)">
+		<input type="button" value="5" class="global" onclick="collectValues(this.value)">
+		<input type="button" value="6" class="global" onclick="collectValues(this.value)">
+		<input type="button" id="multiply" value="*" class="global" onclick="collectValues(this.value)"> </div>
+	<div class="row">
+		<input type="button" value="1" class="global" onclick="collectValues(this.value)">
+		<input type="button" value="2" class="global" onclick="collectValues(this.value)">
+		<input type="button" value="3" class="global" onclick="collectValues(this.value)">
+		<input type="button" id="minus" value="-" class="global" onclick="collectValues(this.value)"> </div>
+	<div class="row">
+		<input type="button" value="0" class="global" onclick="collectValues(this.value)">
+		<input type="button" id="clear" value="Clear" class="global">
+		<input type="button" id="sum" value="=" class="global">
+		<input type="button" value="+" class="global" onclick="collectValues(this.value)"> </div>
+</div>

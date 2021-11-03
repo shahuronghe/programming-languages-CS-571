@@ -1,0 +1,14 @@
+1)
+B.p
+A.s
+C.s
+B.p
+
+
+2)
+A.p
+A.t
+B.p
+A.t
+C.t
+B.p

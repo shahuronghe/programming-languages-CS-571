@@ -1,0 +1,13 @@
+Programming Languages CS-571
+Assignment No 5:
+	Haskell Programming
+
+Group Members:
+	Shahu S Ronghe [sronghe1@binghamton.edu]
+	Shantanu S Walunj [swalunj1@binghamton.edu]
+
+This assignment has been tested on remote.cs.binghamton.edu
+
+Execution Steps:
+	1. open hugs on remote.cs and type ":load assignment5.hs"
+	2. run functions such as remove, delete, maxodd, union with parameters given in the assignment pdf.
